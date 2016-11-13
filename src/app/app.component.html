@@ -1,3 +1,22 @@
 <h1>
   {{title}}
 </h1>
+	<table >
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Edad</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let cli of clientes">
+				<td>{{cli.Id}}</td>
+				<td>{{cli.Nombre}}</td>
+				<td>{{cli.Apellido}}</td>
+				<td>{{cli.Edad}}</td>
+			</tr>
+		</tbody>
+	</table>

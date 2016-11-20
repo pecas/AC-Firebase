@@ -1,32 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from './data.service';
-import { cliente } from './cliente.model';
 declare var firebase: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [DataService]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app works!';
+  title = 'Firebase';
   // clientes: Array <any> = [ 
   //   {"Apellido" : "Alonso",  "Edad" : 53,  "Id" : 1,  "Nombre" : "Eduardo"}, 
   //   {"Apellido" : "Barrios",  "Edad" : 48,  "Id" : 2,  "Nombre" : "Claudia"}
   //   ];
-
-   clientes: Array <any> = [];
-  constructor(private dataservice: DataService){}
+  clientes: Array <any> = [];
+  constructor(){}
 
   ngOnInit() {
    this.fbGetData();
   }
 
   fbGetData() {
-     firebase.database().ref('/').on('child_added', (snapshot) => {
+     firebase.database().ref('/usuarios').on('child_added', (snapshot) => {
       this.clientes.push(snapshot.val());
      });
- //   this.dataservice.getDatos();
+  }
+
+  fbGetDatosOrdenados(){
+    let ref = firebase.database().ref('/usuarios');
+      ref.orderByChild('Apellido').endAt('Barrios').on('child_added', (snapshot) => {
+        this.clientes.push(snapshot.val());
+      });
+  }
+
+  fbPostData(Id, Apellido, Nombre, Edad){
+    firebase.database().ref('/usuarios').push({Id: Id, Apellido: Apellido, Nombre: Nombre, Edad: Edad});
   }
 }

@@ -1,22 +1,42 @@
 <h1>
   {{title}}
 </h1>
-	<table >
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Nombre</th>
-				<th>Apellido</th>
-				<th>Edad</th>
+
+	<ul id="listado-clientes">
+		<li *ngFor="let cli of clientes">
+
+		{{cli.Id}}
+		{{cli.Nombre}}
+		{{cli.Apellido}}
+		{{cli.Edad}}
+	
+		</li>
+	</ul>
+	
+	
+		
+	<h1>Creacion</h1>
+
+		<form #eduform="ngForm" id="add-cliente">
+			<p>
+				<label for="Id">Id</label>
+				<input type="text" [(ngModel)]="Id" name="Id" >
+			</p>
+			<p>
+ 				<label for="Apellido">Apellido</label>
+				<input type="text" [(ngModel)]="Apellido" name="Apellido" >
+			</p>
+			<p>
+	     		<label for="Nombre">Nombre</label>
+				<input type="text" [(ngModel)]="Nombre" name="Npmbre" >
+			</p>
+			<p>
+		        <label for="Edad">Edad</label>
+				<input type="text" [(ngModel)]="Edad" name="Edad"  >		
+			</p>	
 				
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="let cli of clientes">
-				<td>{{cli.Id}}</td>
-				<td>{{cli.Nombre}}</td>
-				<td>{{cli.Apellido}}</td>
-				<td>{{cli.Edad}}</td>
-			</tr>
-		</tbody>
-	</table>
+			<button type="" (click)="fbPostData(Id,Apellido,Nombre,Edad)">Agregar Cliente</button>
+		</form>
+
+
+	
